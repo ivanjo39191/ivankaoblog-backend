@@ -1,16 +1,30 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, status, filters
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
-import django_filters
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+
 from . import serializers
+from .models import Profile
+
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
-
     queryset = User.objects.all()
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        queryset = User.objects.filter(username=self.request.user)
+        return queryset
+
     serializer_class = serializers.UserSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        queryset = Profile.objects.filter(uid=self.request.user)
+        return queryset
+
+    queryset = Profile.objects.all()
+    serializer_class = serializers.ProfileSerializer
