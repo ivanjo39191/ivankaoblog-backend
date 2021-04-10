@@ -29,10 +29,20 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'corsheaders',
-    'users', 'django_filters', 'rest_framework', 'rest_framework.authtoken'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'corsheaders',
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'ckeditor_uploader',
+    'ckeditor',
+    # apps
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -112,18 +122,15 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':
-        {
-            'rest_framework.permissions.IsAdminUser'
-            'rest_framework.permissions.IsAuthenticated',
-        },
+        {'rest_framework.permissions.IsAdminUser'
+         'rest_framework.permissions.IsAuthenticated', },
     'DEFAULT_AUTHENTICATION_CLASSES':
         (
             'rest_framework_simplejwt.authentication.JWTAuthentication',
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
         ),
-    'DEFAULT_FILTER_BACKENDS':
-        ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 # Password validation
@@ -131,20 +138,16 @@ REST_FRAMEWORK = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME':
-            'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME':
-            'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME':
-            'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME':
-            'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -165,3 +168,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 配置ckeditor
+CKEDITOR_UPLOAD_PATH = 'upload/'
+
+#配置ckeditor
+CKEDITOR_CONFIGS = {
+    'default': {},
+    'comment_ckeditor':
+        {
+            'toolbar': 'custom',
+            'toolbar_custom':
+                [
+                    ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                    ["TextColor", "BGColor", 'RemoveFormat'],
+                    ['NumberedList', 'BulletedList'],
+                    ['Link', 'Unlink'],
+                    ["Smiley", "SpecialChar", 'Blockquote'],
+                ],
+            'width': 'auto',
+            'height': '180',
+            'tabSpaces': 4,
+            'removePlugins': 'elementspath',
+            'resize_enabled': False,
+        }
+}
