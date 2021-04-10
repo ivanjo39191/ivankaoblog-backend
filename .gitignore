@@ -12,13 +12,6 @@ src/media/*
 src/tmp/*
 src/private_media/*
 src/config/settings/local_settings.py
-src/travel/migrations/*
-src/er/migrations/*
-src/core/migrations/*
-src/back_office/migrations/*
-src/news/migrations/*
-src/qa/migrations/*
-src/sites/migrations/*
-src/users/migrations/*
+src/*/migrations/*
 .vscode/launch.json
 .vscode/settings.json
