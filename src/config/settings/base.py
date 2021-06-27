@@ -179,22 +179,155 @@ CKEDITOR_UPLOAD_PATH = 'upload/'
 
 #配置ckeditor
 CKEDITOR_CONFIGS = {
-    'default': {},
-    'comment_ckeditor':
+    'default':
         {
-            'toolbar': 'custom',
-            'toolbar_custom':
+            'skin':
+                'moono',
+            # 'skin': 'office2013',
+            'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
+            'toolbar_YourCustomToolbarConfig':
                 [
-                    ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-                    ["TextColor", "BGColor", 'RemoveFormat'],
-                    ['NumberedList', 'BulletedList'],
-                    ['Link', 'Unlink'],
-                    ["Smiley", "SpecialChar", 'Blockquote'],
+                    {
+                        'name': 'document',
+                        'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']
+                    },
+                    {
+                        'name': 'clipboard',
+                        'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                    },
+                    {
+                        'name': 'editing',
+                        'items': ['Find', 'Replace', '-', 'SelectAll']
+                    },
+                    {
+                        'name':
+                            'forms',
+                        'items':
+                            [
+                                'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                                'HiddenField'
+                            ]
+                    },
+                    '/',
+                    {
+                        'name':
+                            'basicstyles',
+                        'items':
+                            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+                    },
+                    {
+                        'name':
+                            'paragraph',
+                        'items':
+                            [
+                                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
+                                'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-',
+                                'BidiLtr', 'BidiRtl', 'Language'
+                            ]
+                    },
+                    {
+                        'name': 'links',
+                        'items': ['Link', 'Unlink', 'Anchor']
+                    },
+                    {
+                        'name':
+                            'insert',
+                        'items':
+                            [
+                                'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak',
+                                'Iframe', 'CodeSnippet'
+                            ]
+                    },
+                    '/',
+                    {
+                        'name': 'styles',
+                        'items': ['Styles', 'Format', 'Font', 'FontSize']
+                    },
+                    {
+                        'name': 'colors',
+                        'items': ['TextColor', 'BGColor']
+                    },
+                    {
+                        'name': 'tools',
+                        'items': ['Maximize', 'ShowBlocks']
+                    },
+                    {
+                        'name': 'about',
+                        'items': ['About']
+                    },
+                    '/',  # put this to force next toolbar on new line
+                    {
+                        'name': 'yourcustomtools',
+                        'items': [
+                            # put the name of your editor.ui.addButton here
+                            'Preview',
+                            'Maximize',
+                        ]
+                    },
+                    {
+                        'name': 'extra',
+                        'items': ['CodeSnippet', ],
+                    },
                 ],
-            'width': 'auto',
-            'height': '180',
-            'tabSpaces': 4,
-            'removePlugins': 'elementspath',
-            'resize_enabled': False,
+            'toolbar':
+                'YourCustomToolbarConfig',  # put selected toolbar config here
+            # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+
+            # 'height': 291,
+            # 'width': '100%',
+            # 'filebrowserWindowHeight': 725,
+            # 'filebrowserWindowWidth': 940,
+            # 'toolbarCanCollapse': True,
+            # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+            'tabSpaces':
+                4,
+            'removePlugins':
+                'stylesheetparser',
+            'extraPlugins':
+                ','.join(
+                    [
+                        'uploadimage',  # the upload image feature
+                        # your extra plugins here
+                        'div',
+                        'autolink',
+                        'autoembed',
+                        'embedsemantic',
+                        'autogrow',
+                        # 'devtools',
+                        'widget',
+                        'lineutils',
+                        'clipboard',
+                        'dialog',
+                        'dialogui',
+                        'elementspath',
+                        'codesnippet'
+                    ]
+                ),
+        },
+    # my costum tool bar i created
+    'special':
+        {
+            'toolbar': 'Special',
+            'toolbar_special': [['codeSnippet', 'Youtube'], ],
+            'extraPlugins': ','.join(['codeSnippet', 'youtube']),
         }
 }
+# 'default': {},
+# 'comment_ckeditor':
+#     {
+#         'toolbar': 'custom',
+#         'toolbar_custom':
+#             [
+#                 ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+#                 ["TextColor", "BGColor", 'RemoveFormat'],
+#                 ['NumberedList', 'BulletedList'],
+#                 ['Link', 'Unlink'],
+#                 ["Smiley", "SpecialChar", 'Blockquote', 'CodeSnippet'],
+#             ],
+#         'width': 'auto',
+#         'height': '180',
+#         'tabSpaces': 4,
+#         'removePlugins': 'elementspath',
+#         'resize_enabled': False,
+#     }
+#}
