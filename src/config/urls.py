@@ -21,6 +21,9 @@ from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_simplejwt import views as jwt_views
 
+admin.site.site_title = settings.ADMIN_SITE_TITLE
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', obtain_auth_token),

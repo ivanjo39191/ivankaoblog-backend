@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -331,3 +332,11 @@ CKEDITOR_CONFIGS = {
 #         'resize_enabled': False,
 #     }
 #}
+
+# SITENAME
+ADMIN_SITE_TITLE = "IvanKao 的技術部落格--管理端"
+ADMIN_SITE_HEADER = "IvanKao 的技術部落格--管理端"
+
+# SIMPLE_UI
+# SIMPLEUI_LOGIN_PARTICLES = False
+SIMPLEUI_HOME_TITLE = '首頁'
