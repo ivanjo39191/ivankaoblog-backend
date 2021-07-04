@@ -20,19 +20,19 @@ class TitleFilter(django_filters.FilterSet):
     name = django_filters.Filter(field_name='title', lookup_expr='icontains')
 
     class Meta:
-        fields = ['title']
+        fields = ('title',)
 
 
 class TypeFilter(django_filters.FilterSet):
     def __init__(self, *args, type=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-    type = django_filters.Filter(field_name='types__type_name', lookup_expr='iexact')
+    types = django_filters.Filter(field_name='types__type_name', lookup_expr='iexact')
+    subtypes = django_filters.Filter(field_name='subtypes__subtype_name', lookup_expr='iexact')
+    tags = django_filters.Filter(field_name='tags__tag_name', lookup_expr='iexact')
 
     class Meta:
-        fields = [
-            'types',
-        ]
+        fields = ('types', 'subtypes', 'tags')
 
 
 class BlogViewSet(viewsets.ModelViewSet):
