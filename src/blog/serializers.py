@@ -6,10 +6,10 @@ from rest_framework.authtoken.models import Token
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ('id', 'title', 'content', 'type', 'author', 'time', 'banner')
+        fields = ('id', 'title', 'content', 'types', 'subtypes', 'tags', 'author', 'created', 'banner')
 
 
 class BlogTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ('id', 'title', 'type', 'author', 'time', 'banner')
+        fields = ('id', 'title', 'types', 'subtypes', 'tags', 'author', 'created', 'banner')

@@ -27,11 +27,11 @@ class TypeFilter(django_filters.FilterSet):
     def __init__(self, *args, type=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-    type = django_filters.Filter(field_name='type__type_name', lookup_expr='iexact')
+    type = django_filters.Filter(field_name='types__type_name', lookup_expr='iexact')
 
     class Meta:
         fields = [
-            'type',
+            'types',
         ]
 
 
