@@ -1,0 +1,76 @@
+@media (max-width: 767px) {
+
+    .selector {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100vw;;
+    }
+
+    .selector-available {
+        width: 100vw;;
+        text-align: left;
+    }
+
+    .selector-available > h2 {
+        font-size: 1.25rem;
+        width: 75vw;
+        text-align: center;
+    }
+
+    .selector-available > p {
+        width: 75vw;
+        text-align: left;
+    }
+
+    .selector-available > p > input {
+        width: 65vw!important;
+        text-align: left;
+    }
+    .selector-available > select {
+        width: 75vw!important;
+        text-align: left;
+    }
+
+
+
+    .selector ul.selector-chooser {
+        display: flex;
+        width: 75vw;
+        justify-content: center;
+        background-color: #eee;
+        border-radius: 10px;
+        margin: 0.5rem 0 0.5rem 0;
+        padding: 0;
+    }
+
+    .selector ul.selector-chooser > li {
+        transform: rotate(90deg);
+    }
+
+    .selector-available, .selector-chosen {
+        width: 100vw;;
+        text-align: left;
+        float: left;
+        margin-bottom: 5px;
+    }
+
+    .selector-available, .selector-chosen > h2 {
+        font-size: 1.25rem;
+        width: 75vw;
+        text-align: center;
+    }
+
+    .selector-available, .selector-chosen > p {
+        width: 75vw;
+        text-align: left;
+    }
+
+    .selector-available, .selector-chosen > p > input {
+        width: 65vw!important;
+        text-align: left;
+    }
+    .selector-available, .selector-chosen > select {
+        width: 75vw!important;
+        text-align: left;
+    }
+}
