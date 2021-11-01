@@ -13,7 +13,7 @@ class BlogForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'types': FilteredSelectMultiple(_('Blog Type'), is_stacked=False),
-            'subtypes': FilteredSelectMultiple(_('Blog Type'), is_stacked=False),
-            'tags': FilteredSelectMultiple(_('Blog Type'), is_stacked=False),
+            'subtypes': FilteredSelectMultiple(_('Blog SubType'), is_stacked=False),
+            'tags': FilteredSelectMultiple(_('Blog Tags'), is_stacked=False),
             # 'subtype': Select2()
         }
