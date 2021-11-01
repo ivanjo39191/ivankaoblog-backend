@@ -1,8 +1,10 @@
-from .blog import Blog, BlogType, BlogSubtype, BlogTag
+from .blog import *
 
 __all__ = (
     'Blog',
     'BlogType',
     'BlogSubtype',
-    'BlogTag'
+    'BlogTag',
+    'BlogStatus',
+    'BlogHistory'
 )
