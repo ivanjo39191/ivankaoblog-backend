@@ -22,6 +22,13 @@ class TitleFilter(django_filters.FilterSet):
     class Meta:
         fields = ('title',)
 
+class TitleFilter(django_filters.FilterSet):
+    def __init__(self, *args, name=None, **kwargs):
+        super().__init__(*args, **kwargs)
+    id = django_filters.Filter(field_name='id', lookup_expr='exact')
+    title = django_filters.Filter(field_name='title', lookup_expr='exact')
+    class Meta:
+        fields = ['id', 'title']
 
 class TypeFilter(django_filters.FilterSet):
     def __init__(self, *args, type=None, **kwargs):
@@ -39,7 +46,7 @@ class BlogViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.BlogSerializer
     permission_classes = (AllowAny, )
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.filter(status__name='公開').order_by('-publisher_date')
 
     def filter_queryset(self, queryset):
         if self.action == 'blogtype':
@@ -48,6 +55,7 @@ class BlogViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def title(self, request):
+        
         queryset = self.filter_queryset(self.get_queryset())[0:20]
         serializer = serializers.BlogTitleSerializer(queryset, many=True)
         return Response(serializer.data)
