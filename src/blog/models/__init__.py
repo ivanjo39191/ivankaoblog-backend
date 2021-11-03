@@ -6,5 +6,7 @@ __all__ = (
     'BlogSubtype',
     'BlogTag',
     'BlogStatus',
-    'BlogHistory'
+    'BlogHistory',
+    'BlogSetting',
+    'HomeCarousel'
 )

@@ -9,7 +9,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.authentication import TokenAuthentication
 
-from .models import Blog
+from .models import Blog, BlogSetting, HomeCarousel, BlogType
 from . import serializers
 
 
@@ -65,3 +65,22 @@ class BlogViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())[0:20]
         serializer = serializers.BlogTitleSerializer(queryset, many=True)
         return Response(serializer.data)
+
+class BlogSettingViewSet(viewsets.ModelViewSet):
+    
+    serializer_class = serializers.BlogSettingSerializer
+    permission_classes = (AllowAny, )
+    queryset = BlogSetting.objects.filter(active=True).order_by('order')
+
+class HomeCarouselViewSet(viewsets.ModelViewSet):
+    
+    serializer_class = serializers.HomeCarouselSerializer
+    permission_classes = (AllowAny, )
+    queryset = HomeCarousel.objects.filter(active=True).order_by('order')
+    
+class BlogTypeViewSet(viewsets.ModelViewSet):
+    
+    serializer_class = serializers.BlogTypeSerializer
+    permission_classes = (AllowAny, )
+    queryset = BlogType.objects.filter(is_home=True).order_by('order')
+

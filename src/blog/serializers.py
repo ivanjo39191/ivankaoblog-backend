@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Blog, BlogType, BlogSubtype, BlogTag
+from .models import Blog, BlogType, BlogSubtype, BlogTag, BlogSetting, HomeCarousel
 from rest_framework.authtoken.models import Token
 
 
@@ -55,3 +55,36 @@ class BlogTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ('id', 'title', 'types', 'subtypes', 'tags', 'author', 'created', 'banner')
+
+
+
+class BlogSettingSerializer(serializers.ModelSerializer):
+
+    author = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='username'
+     )
+
+    class Meta:
+        model = BlogSetting
+        fields = ('id', 'title', 'subtitle', 'author', 'created', 'banner',)
+
+
+class HomeCarouselSerializer(serializers.ModelSerializer):
+    
+    author = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='username'
+     )
+
+    class Meta:
+        model = HomeCarousel
+        fields = ('id', 'title', 'subtitle', 'author', 'created', 'banner',)
+
+class BlogTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = BlogType
+        fields = ('id', 'type_name',)

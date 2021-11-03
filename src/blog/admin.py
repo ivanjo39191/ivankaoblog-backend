@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import Blog, BlogType, BlogSubtype, BlogTag, BlogStatus, BlogHistory
+from .models import Blog, BlogType, BlogSubtype, BlogTag, BlogStatus, BlogHistory, BlogSetting, HomeCarousel
 from .forms import BlogForm
 
 @admin.register(BlogHistory)
@@ -92,7 +92,7 @@ class BlogTypeAdmin(admin.ModelAdmin):
     def count(self, obj):
         return obj.blog_set.count()
 
-    list_display = ('type_name', 'count')
+    list_display = ('type_name', 'count', 'is_home', 'order')
 
 
 @admin.register(BlogSubtype)
@@ -116,3 +116,53 @@ class BlogStatusAdmin(admin.ModelAdmin):
         return obj.blog_set.count()
 
     list_display = ('name', 'count')
+
+
+@admin.register(BlogSetting)
+class BlogSettingAdmin(admin.ModelAdmin):
+
+    list_display = ('title', 'modified', 'created', 'active')
+    search_fields = ['title',]
+    fieldsets = [
+        (
+            None, {
+                'classes': (
+
+                ),
+                'fields':
+                    (
+                        'title', 'subtitle', 'author', 'banner', 'active', 'order'
+                    )
+            }
+        ),
+    ]
+
+    class Media:
+        css = {
+             'all': ('/static/custom/css/filteredselectmultiple.css',)
+        }
+
+
+@admin.register(HomeCarousel)
+class HomeCarouselAdmin(admin.ModelAdmin):
+
+    list_display = ('title', 'modified', 'created', 'active')
+    search_fields = ['title',]
+    fieldsets = [
+        (
+            None, {
+                'classes': (
+
+                ),
+                'fields':
+                    (
+                        'title', 'subtitle', 'author', 'banner', 'active', 'order'
+                    )
+            }
+        ),
+    ]
+
+    class Media:
+        css = {
+             'all': ('/static/custom/css/filteredselectmultiple.css',)
+        }
