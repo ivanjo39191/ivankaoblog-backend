@@ -24,13 +24,16 @@ SECRET_KEY = '^lzsbt6o0l(l5g8&f-cu9csxli)guj*q7j$j*gnvym1#y61_q8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'simpleui',
+    # 'simpleui',
+    'adminlte3',
+    'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,23 +74,23 @@ CORS_ALLOW_HEADERS = ('*')
 
 ROOT_URLCONF = 'config.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS':
-            {
-                'context_processors':
-                    [
-                        'django.template.context_processors.debug',
-                        'django.template.context_processors.request',
-                        'django.contrib.auth.context_processors.auth',
-                        'django.contrib.messages.context_processors.messages',
-                    ],
-            },
-    },
-]
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+#         'APP_DIRS': True,
+#         'OPTIONS':
+#             {
+#                 'context_processors':
+#                     [
+#                         'django.template.context_processors.debug',
+#                         'django.template.context_processors.request',
+#                         'django.contrib.auth.context_processors.auth',
+#                         'django.contrib.messages.context_processors.messages',
+#                     ],
+#             },
+#     },
+# ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -157,9 +160,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hant'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 
@@ -170,10 +173,80 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+DEBUG_TEMPLATE = False
+
+_TEMPLATE_LOADERS = [
+    (
+        'django.template.loaders.cached.Loader',
+        (
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+            # 'django.template.loaders.eggs.Loader',
+        )
+    ),
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'OPTIONS':
+            {
+                'context_processors':
+                    [
+                        "django.template.context_processors.debug",
+                        'django.template.context_processors.request',
+                        "django.contrib.auth.context_processors.auth",
+                        "django.contrib.messages.context_processors.messages",
+                        # "context_processors.testing",  # Testing
+                    ],
+                'loaders': _TEMPLATE_LOADERS,
+                'debug': DEBUG_TEMPLATE,
+            }
+    },
+]
+
+
+
+# List of callables that know how to import templates from various
+# sources.
+TEMPLATE_LOADERS = _TEMPLATE_LOADERS
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+)
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'templates'),
+)
+
 
 # 配置ckeditor
 CKEDITOR_UPLOAD_PATH = 'upload/'
@@ -274,11 +347,11 @@ CKEDITOR_CONFIGS = {
                 'YourCustomToolbarConfig',  # put selected toolbar config here
             # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
 
-            # 'height': 291,
-            # 'width': '100%',
-            # 'filebrowserWindowHeight': 725,
-            # 'filebrowserWindowWidth': 940,
-            # 'toolbarCanCollapse': True,
+            'height': 291,
+            'width': '100%',
+            'filebrowserWindowHeight': 725,
+            'filebrowserWindowWidth': 940,
+            'toolbarCanCollapse': True,
             # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
             'tabSpaces':
                 4,
@@ -334,9 +407,16 @@ CKEDITOR_CONFIGS = {
 #}
 
 # SITENAME
-ADMIN_SITE_TITLE = "IvanKao 的技術部落格--管理端"
-ADMIN_SITE_HEADER = "IvanKao 的技術部落格--管理端"
+ADMIN_SITE_TITLE = os.environ.get('ADMIN_SITE_TITLE', '')
+ADMIN_SITE_HEADER = os.environ.get('ADMIN_SITE_HEADER', '')
 
 # SIMPLE_UI
 # SIMPLEUI_LOGIN_PARTICLES = False
 SIMPLEUI_HOME_TITLE = '首頁'
+
+# 登入相關設定login
+#------------------------------------
+LOGIN_URL = '/admin/login/'
+LOGIN_ERROR_URL = '/admin/login/'
+LOGOUT_URL = '/admin/login/'
+#------------------------------------
