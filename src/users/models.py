@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from model_utils.models import TimeStampedModel
-
+from core import helpers
 
 class Profile(TimeStampedModel):
     uid = models.OneToOneField(
@@ -17,7 +17,7 @@ class Profile(TimeStampedModel):
     introduction = models.CharField(
         max_length=200, blank=True, verbose_name='介紹'
     )
-    avatar = models.CharField(max_length=200, blank=True, verbose_name='icon')
+    avatar = models.FileField("頭像", null=True, blank=True, upload_to=helpers.upload_handle)
     name = models.CharField(max_length=200, blank=True, verbose_name='名稱')
 
     class Meta:
