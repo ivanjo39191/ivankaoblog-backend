@@ -72,6 +72,7 @@ class BlogAdmin(admin.ModelAdmin):
         }
 
     def save_model(self, request, obj, form, change):
+        obj.save()
         blog_history = BlogHistory.objects.create()
         blog_history.title = obj.title
         blog_history.subtitle = obj.subtitle
@@ -84,7 +85,6 @@ class BlogAdmin(admin.ModelAdmin):
         blog_history.publisher_date = obj.publisher_date
         blog_history.status = BlogStatus.objects.get(name='歷史紀錄')
         blog_history.save()
-        obj.save()
 
         
 @admin.register(BlogType)
@@ -131,7 +131,7 @@ class BlogSettingAdmin(admin.ModelAdmin):
                 ),
                 'fields':
                     (
-                        'title', 'subtitle', 'author', 'banner', 'active', 'order'
+                        'title', 'subtitle', 'author', 'active', 'order'
                     )
             }
         ),
