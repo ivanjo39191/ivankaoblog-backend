@@ -1,11 +1,9 @@
-#!/usr/local/bin/python3.8
+#!/usr/bin/python3.8
 import os
 import sys
 
 if __name__ == "__main__":
-    
     PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-    print(PROJECT_ROOT)
     site_packages = os.path.join(PROJECT_ROOT, 'libs')
     if site_packages not in sys.path:
         sys.path.insert(0, site_packages)
@@ -13,6 +11,7 @@ if __name__ == "__main__":
     sys.path.append('..')
 
     import pymysql
+    pymysql.version_info = (1, 3, 13, "final", 0)
     pymysql.install_as_MySQLdb()
 
     import dotenv
