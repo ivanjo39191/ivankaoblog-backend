@@ -68,7 +68,7 @@ class BlogSettingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogSetting
-        fields = ('id', 'title', 'subtitle', 'author', 'created', 'banner',)
+        fields = ('id', 'title', 'subtitle', 'blogname', 'author', 'created', 'logo',)
 
 
 class HomeCarouselSerializer(serializers.ModelSerializer):

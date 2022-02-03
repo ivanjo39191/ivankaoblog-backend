@@ -67,10 +67,9 @@ class BlogViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class BlogSettingViewSet(viewsets.ModelViewSet):
-    
     serializer_class = serializers.BlogSettingSerializer
     permission_classes = (AllowAny, )
-    queryset = BlogSetting.objects.filter(active=True).order_by('order')
+    queryset = BlogSetting.objects.filter(active=True).order_by('order')[0:1]
 
 class HomeCarouselViewSet(viewsets.ModelViewSet):
     

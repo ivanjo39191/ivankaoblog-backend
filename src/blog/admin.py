@@ -131,7 +131,7 @@ class BlogSettingAdmin(admin.ModelAdmin):
                 ),
                 'fields':
                     (
-                        'title', 'subtitle', 'author', 'active', 'order'
+                        'title', 'subtitle', 'blogname', 'author', 'active', 'order'
                     )
             }
         ),

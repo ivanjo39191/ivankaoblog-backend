@@ -82,9 +82,9 @@ class BlogHistory(Blog):
 
 
 class BlogSetting(TimeStampedModel):
-    
     title = models.CharField(max_length=200, null=True)
     subtitle = models.CharField(max_length=200, null=True)
+    blogname = models.CharField(max_length=200, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     logo = models.FileField("Logo", null=True, blank=True, upload_to=helpers.upload_handle)
     active = models.BooleanField(_('Active'), default=True)
