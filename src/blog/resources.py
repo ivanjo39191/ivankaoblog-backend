@@ -14,8 +14,8 @@ class BlogResource(resources.ModelResource):
 
     class Meta:
         model = Blog
-        fields = ('id', 'title', 'subtitle', 'content', 'types', 'subtypes', 'tags', 'status', 'author', 'banner', 'publisher_date')
-        export_order = ('id', 'title', 'subtitle', 'content', 'types', 'subtypes', 'tags', 'status', 'author', 'banner', 'publisher_date')
+        fields = ('id', 'title', 'subtitle', 'content', 'types', 'subtypes', 'tags', 'status', 'author', 'banner', 'publisher_date', 'created', 'modified')
+        export_order = ('id', 'title', 'subtitle', 'content', 'types', 'subtypes', 'tags', 'status', 'author', 'banner', 'publisher_date', 'created', 'modified')
 
 
 
