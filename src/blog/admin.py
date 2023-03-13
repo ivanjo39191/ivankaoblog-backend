@@ -2,8 +2,10 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 from .models import Blog, BlogType, BlogSubtype, BlogTag, BlogStatus, BlogHistory, BlogSetting, HomeCarousel
 from .forms import BlogForm
+from .resources import BlogResource, BlogTypeResource, BlogSubtypeResource, BlogTagResource, BlogStatusResource
 
 @admin.register(BlogHistory)
 class BlogHistoryAdmin(admin.ModelAdmin):
@@ -39,7 +41,7 @@ class BlogHistoryAdmin(admin.ModelAdmin):
         }
 
 @admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
+class BlogAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -49,6 +51,7 @@ class BlogAdmin(admin.ModelAdmin):
         return "、".join([p.type_name for p in obj.types.all()])
         
     form = BlogForm
+    resource_class = BlogResource
     list_display = ('title', 'get_types', 'modified', 'publisher_date', 'created')
     list_filter = ['types', 'subtypes', 'tags']
     search_fields = ['title',]
@@ -88,34 +91,39 @@ class BlogAdmin(admin.ModelAdmin):
 
         
 @admin.register(BlogType)
-class BlogTypeAdmin(admin.ModelAdmin):
+class BlogTypeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     def count(self, obj):
         return obj.blog_set.count()
 
+    resource_class = BlogTypeResource
     list_display = ('type_name', 'count', 'is_home', 'order')
 
 
 @admin.register(BlogSubtype)
-class BlogSubtypeAdmin(admin.ModelAdmin):
+class BlogSubtypeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     def count(self, obj):
         return obj.blog_set.count()
 
+    resource_class = BlogSubtypeResource
     list_display = ('subtype_name', 'type', 'count')
 
 
 @admin.register(BlogTag)
-class BlogTagAdmin(admin.ModelAdmin):
+class BlogTagAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     def count(self, obj):
         return obj.blog_set.count()
 
+    resource_class = BlogTagResource
     list_display = ('tag_name', 'count')
 
 @admin.register(BlogStatus)
-class BlogStatusAdmin(admin.ModelAdmin):
+class BlogStatusAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     def count(self, obj):
         return obj.blog_set.count()
 
+    resource_class = BlogStatusResource
     list_display = ('name', 'count')
+
 
 
 @admin.register(BlogSetting)

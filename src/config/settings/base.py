@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     # Auth & social auth
     'dj_rest_auth',
+    'import_export',
     'allauth',
     'allauth.account',
     'dj_rest_auth.registration',
